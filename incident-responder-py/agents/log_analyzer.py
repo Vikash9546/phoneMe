@@ -31,6 +31,11 @@ class LogAnalyzer:
         Return ONLY a valid JSON object with this structure:
         {{
             "root_cause": "brief description",
+            "per_log_analysis": {{
+                "nginx_access": "summary of findings in this file",
+                "nginx_error": "summary of findings in this file",
+                "app_error": "summary of findings in this file"
+            }},
             "evidence": ["snippet 1", "snippet 2"],
             "confidence_level": 0-100,
             "diagnosis_details": "detailed explanation",
@@ -43,6 +48,11 @@ class LogAnalyzer:
             print("[Agent 1] Note: Using Demo Mode (Placeholder Key)")
             return {
                 "root_cause": "Database session leak in rebalance workflow",
+                "per_log_analysis": {
+                    "nginx_access": "Multiple 504 Gateway Timeouts observed on /api/login and /api/portfolio endpoints.",
+                    "nginx_error": "Upstream timeout errors indicating the application server stopped responding to requests.",
+                    "app_error": "Clear evidence of QueuePool saturation and 'session close skipped' in rebalance_service.py."
+                },
                 "evidence": [
                     "2026-03-17 11:41:16,558 WARN [api.db] session close skipped request_id=7cd441 endpoint=/api/v1/orders/rebalance code_path=portfolio/rebalance_service.py:118",
                     "2026-03-17 11:41:17,071 WARN [api.db] suspected session leak count=23",
