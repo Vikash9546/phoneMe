@@ -96,9 +96,3 @@ The system's design is optimized for enterprise SRE environments:
 **Details**:
 The system experienced database connection pool exhaustion due to improperly managed database sessions. A recent deployment introduced changes in the `rebalance_service` that caused sessions to not be closed or returned to the pool.
 
-**As a result**:
-- Connections accumulated over time.
-- Pool limit (20 + 5 overflow) was reached.
-- New requests timed out waiting for connections.
-- Database started rejecting new connections.
-- This led to cascading failures across APIs and worker timeouts.
