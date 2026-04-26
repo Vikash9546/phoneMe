@@ -13,6 +13,20 @@ A multi-agent system designed to automate the diagnosis and remediation planning
 
 The system serves as an automated first-responder for site reliability engineers. It processes raw server logs (Nginx and Application) to identify the root cause of service degradations, researches industry-standard solutions, and generates a validated remediation plan to restore service.
 
+## Workflow Diagram
+
+```mermaid
+graph TD
+    A[Log Files] -->|Ingest| B(Orchestrator)
+    B -->|Logs| C[Agent 1: Log Analysis]
+    C -->|Diagnosis JSON| B
+    B -->|Diagnosis| D[Agent 2: Solution Research]
+    D -->|Solutions JSON| B
+    B -->|Diagnosis + Solutions| E[Agent 3: Resolution Planning]
+    E -->|Remediation Plan| B
+    B -->|Detailed Report| F[Final Output/User]
+```
+
 ## Flow
 
 1. Log Ingestion: The orchestrator identifies and reads logs from the /logs directory.
