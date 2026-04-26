@@ -37,18 +37,21 @@ graph TD
 
 ## Setup
 
-1. Create and activate a virtual environment:
+1. Navigate to the project directory:
+   cd incident-responder-py
+
+2. Create and activate a virtual environment:
    python3 -m venv venv
    source venv/bin/activate
 
-2. Install the necessary dependencies:
+3. Install the necessary dependencies:
    pip install -r requirements.txt
 
-3. Configure the environment:
-   Create a .env file in the root directory and add your Groq API key:
+4. Configure the environment:
+   Create a .env file in the incident-responder-py directory and add your Groq API key:
    GROQ_API_KEY=your_api_key_here
 
-4. Execute the system:
+5. Execute the system:
    python3 main.py
 
 ## Agent Boundaries
