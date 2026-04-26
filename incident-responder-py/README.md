@@ -74,3 +74,17 @@ The system's design is optimized for enterprise SRE environments:
 - **Advisory Mode**: The system provides instructions but does not execute changes automatically, maintaining a "human-in-the-loop" safety standard.
 - **Source-Grounded Research**: Agent 2's reliance on technical retrieval ensures that fixes are derived from documentation rather than probabilistic model outputs.
 - **Cascading Analysis**: The workflow traces the lifecycle of an error from application logs through infrastructure layers to user-facing Nginx timeouts, mimicking professional troubleshooting methodologies.
+## Agent Prompts
+
+### Agent 1: Log Analysis
+> "You are an expert SRE (Site Reliability Engineer). Analyze the following log files... Identify the most likely root cause... Extract strong log evidence... Provide a structured handoff for the Research Agent."
+- **Focus**: Evidence extraction, diagnosis precision, and cascading failure tracing.
+
+### Agent 2: Solution Research
+> (Programmatic Retrieval)
+- **Logic**: Uses the `handoff_summary` from Agent 1 to perform a targeted lookup in a technical knowledge base.
+- **Focus**: Verifiability and source-backed remediation.
+
+### Agent 3: Resolution Planning
+> "You are the Incident Commander (Resolution Planner Agent). Based on the following inputs [Diagnosis + Research], create a step-by-step remediation plan... Select the safest solution... Include validation and rollback notes."
+- **Focus**: Operational safety, clarity of instructions, and post-fix validation.
