@@ -4,7 +4,6 @@ from groq import Groq
 class ResolutionPlanner:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.client = Groq(api_key=api_key)
         self.model = "llama-3.3-70b-versatile"
 
     def create_plan(self, diagnosis, research):
@@ -53,7 +52,8 @@ class ResolutionPlanner:
                 "safety_notes": "Ensure you don't reduce the pool below what's needed for peak load handling."
             }
 
-        chat_completion = self.client.chat.completions.create(
+        client = Groq(api_key=self.api_key)
+        chat_completion = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
             model=self.model,
             response_format={"type": "json_object"}

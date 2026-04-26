@@ -8,6 +8,11 @@ from agents.resolution_planner import ResolutionPlanner
 def main():
     load_dotenv()
     api_key = os.getenv("GROQ_API_KEY")
+    # Debug: check if key is loaded
+    if api_key:
+        print(f"[Debug] API Key loaded: {api_key[:10]}...")
+    else:
+        print("[Debug] API Key NOT loaded")
 
     print("\n--- 🐍 Python Incident Response System (Powered by Groq) ---")
     

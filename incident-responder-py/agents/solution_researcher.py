@@ -10,17 +10,28 @@ class SolutionResearcher:
                     "content": "Implement connection pooling using tools like PgBouncer. Avoid connecting directly from many app instances.",
                     "pros": "Drastically reduces DB overhead",
                     "cons": "Requires managing an extra service"
+                }
+            ],
+            "session leak": [
+                {
+                    "title": "Identifying and Fixing SQLAlchemy Session Leaks",
+                    "source": "Engineering Handbook",
+                    "url": "https://docs.sqlalchemy.org/en/20/orm/session_basics.html#session-frequently-asked-questions",
+                    "content": "Ensure every session is closed using context managers or try/finally blocks. Common in long-running background tasks or rebalance workflows.",
+                    "pros": "Solves the actual root cause, prevents memory growth",
+                    "cons": "Requires code changes and thorough testing"
                 },
                 {
-                    "title": "Application Pool Tuning",
-                    "source": "Engineering Blog",
-                    "url": "https://example.com/blog/pool-tuning",
-                    "content": "Set pool size to (Total Max Connections / Replicas) - 5 to leave headroom.",
-                    "pros": "Immediate fix without new infra",
-                    "cons": "May limit peak throughput"
+                    "title": "Python Context Manager Patterns for DB Sessions",
+                    "source": "Tech Blog",
+                    "url": "https://example.com/blog/python-db-sessions",
+                    "content": "Use @contextmanager to wrap DB sessions. Ensure session.close() is always called.",
+                    "pros": "Highly reliable pattern",
+                    "cons": "Initial refactoring effort"
                 }
             ],
             "default": [
+                # ... existing default
                 {
                     "title": "Standard SRE Response",
                     "source": "SRE Handbook",
@@ -36,7 +47,9 @@ class SolutionResearcher:
         query = diagnosis.get("handoff_summary", "").lower()
         
         results = []
-        if "connection" in query or "pool" in query:
+        if "session" in query or "leak" in query:
+            results = self.kb["session leak"]
+        elif "connection" in query or "pool" in query:
             results = self.kb["connection pool"]
         else:
             results = self.kb["default"]
