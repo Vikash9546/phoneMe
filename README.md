@@ -56,6 +56,21 @@ graph TD
 
 ## Agent Boundaries
 
-- Agent 1 is focused on evidence extraction and diagnosis.
-- Agent 2 is restricted to technical retrieval to ensure solutions are grounded in verified sources.
-- Agent 3 is focused on operational safety and step-by-step execution logic.
+To ensure reliability and prevent "hallucination loops," each agent has a strictly defined scope:
+- **Log Analysis Agent (Agent 1)**: Primary responsibility is evidence extraction and diagnosis. It is isolated from solution generation to prevent premature conclusions.
+- **Solution Research Agent (Agent 2)**: Dedicated to technical retrieval. It is restricted to verified technical sources to ensure recommendations are grounded in industry-standard practices.
+- **Resolution Planner Agent (Agent 3)**: Acts as the Incident Commander, converting diagnosis and research into a logical, ordered checklist for a human operator.
+
+## Handoff Format
+
+The agents communicate using a Structured JSON Schema to ensure data integrity:
+- **Diagnosis Schema**: Contains the root cause, per-log analysis, and a structured handoff summary for research.
+- **Research Schema**: Includes a list of suggested solutions with descriptions, pros, cons, and source URLs.
+- **Plan Schema**: Focuses on ordered remediation steps, pre-checks, and a validated rollback plan.
+
+## Production Reasonability
+
+The system's design is optimized for enterprise SRE environments:
+- **Advisory Mode**: The system provides instructions but does not execute changes automatically, maintaining a "human-in-the-loop" safety standard.
+- **Source-Grounded Research**: Agent 2's reliance on technical retrieval ensures that fixes are derived from documentation rather than probabilistic model outputs.
+- **Cascading Analysis**: The workflow traces the lifecycle of an error from application logs through infrastructure layers to user-facing Nginx timeouts, mimicking professional troubleshooting methodologies.
