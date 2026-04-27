@@ -88,11 +88,5 @@ The system's design is optimized for enterprise SRE environments:
 ### Agent 3: Resolution Planning
 > "You are the Incident Commander (Resolution Planner Agent). Based on the following inputs [Diagnosis + Research], create a step-by-step remediation plan... Select the safest solution... Include validation and rollback notes."
 - **Focus**: Operational safety, clarity of instructions, and post-fix validation.
-## Sample Incident Analysis
 
-### Root Cause: Database session leak in rebalance workflow
-**Confidence**: 95%
-
-**Details**:
-The system experienced database connection pool exhaustion due to improperly managed database sessions. A recent deployment introduced changes in the `rebalance_service` that caused sessions to not be closed or returned to the pool.
 
